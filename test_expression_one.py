@@ -27,7 +27,7 @@ class TestingExpressionOne(TestCase):
         result = expression_one(self.customers[0])
         work_latency = time.time() - start_time
 
-        print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
+        print("Expression evaluated in {work_latency} s".format(work_latency=work_latency))
 
         self.assertEqual(result, JOURNEY_A)
 
@@ -36,6 +36,6 @@ class TestingExpressionOne(TestCase):
         result = expression_one(self.customers[1])
         work_latency = time.time() - start_time
 
-        print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
+        print("Expression evaluated in {work_latency} s".format(work_latency=work_latency))
 
         self.assertEqual(result, JOURNEY_B)
