@@ -138,7 +138,7 @@ def expression_three_benchmark():
 
 def expression_two_benchmark():
     return timed(
-        expression_three,
+        expression_two,
         Customer(
             id="12132323",
             name="testing_journey_one",
