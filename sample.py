@@ -67,7 +67,14 @@ def expression_one(customer):
     return t.render(dict(customer=customer))
 
 
-def expression_two():
+def expression_two(name, msisdn):
+    target_date = datetime.today() + timedelta(days=30)
+    expr = """{% if loan.dueDate >= target_date and loan.amount < 1000 and loan.interest_rate > 5 %} journeyB
+        {% elif customer.name == name and customer.msisdn == msidn %} journeyA
+        {% else %} DEFAULT
+        {% endif %}"""
+    template = env.from_string(expr)
+    return template.render(target_date=target_date, customer=customer[0], loan=loan[0])
     pass
 
 
