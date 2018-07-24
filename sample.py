@@ -103,11 +103,16 @@ def expression_four(customer):
 
 
 def timed(fun, *args):
-    t0 = pc()
-    r = fun(*args)
-    time_taken = (pc() - t0) * 1000
-    print('{} execution took {} miliseconds.'.format(fun.__name__, time_taken))
-    return time_taken , r
+    test_num = []
+    for i in range(1000):
+        t0 = pc()
+        r = fun(*args)
+        time_taken = (pc() - t0) * 1000
+        test_num.append(time_taken)
+
+    avarage_time_taken = sum(test_num)/len(test_num)
+    print('{} execution took {} miliseconds.'.format(fun.__name__, avarage_time_taken))
+    return avarage_time_taken
 
 
 
@@ -128,4 +133,4 @@ if __name__ == "__main__":
     parser.add_argument('expression', type=str)
 
     args = parser.parse_args()
-    print(globals()['expression_%s_benchmark'% args.expression]())
+    globals()['expression_%s_benchmark'% args.expression]()
