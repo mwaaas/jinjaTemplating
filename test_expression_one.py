@@ -1,6 +1,6 @@
 import time
 from unittest import TestCase
-from sample import expression_one, Customer
+from sample import expression_one, Customer, JOURNEY_A, JOURNEY_B
 
 
 class TestingExpressionOne(TestCase):
@@ -29,7 +29,7 @@ class TestingExpressionOne(TestCase):
 
         print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
 
-        self.assertEqual("Journey A", result)
+        self.assertEqual(JOURNEY_A, result)
 
     def test_riskband_not_4(self):
         start_time = time.time()
@@ -38,4 +38,4 @@ class TestingExpressionOne(TestCase):
 
         print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
 
-        self.assertEqual("Journey B", result)
+        self.assertEqual(JOURNEY_B, result)

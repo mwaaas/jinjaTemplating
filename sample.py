@@ -3,6 +3,7 @@ from time import perf_counter as pc
 import argparse
 from datetime import datetime, timedelta
 
+JOURNEY_A, JOURNEY_B = "Journey A", "Journey B"
 FILTERS = {}
 
 
@@ -82,6 +83,7 @@ def expression_three(customer):
     template = env.from_string(expression)
     return template.render(dict(customer=customer))
 
+
 def expression_four(customer):
     """
     Just like expression three but using function instead of filters
@@ -108,7 +110,6 @@ def timed(fun, *args):
     return avarage_time_taken
 
 
-
 def expression_three_benchmark():
     return timed(
         expression_three,Customer(
@@ -119,6 +120,7 @@ def expression_three_benchmark():
                 riskband="6"
             )
     )
+
 
 def expression_one_benchmark():
     return timed(
