@@ -25,17 +25,17 @@ class TestingExpressionOne(TestCase):
     def test_riskband_4(self):
         start_time = time.time()
         result = expression_one(self.customers[0])
-        work_latency = time.time() - start_time
+        work_latency = (time.time() - start_time) * 1000
 
-        print("Expression evaluated in {work_latency} s".format(work_latency=work_latency))
+        print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
 
         self.assertEqual(result, JOURNEY_A)
 
     def test_riskband_not_4(self):
         start_time = time.time()
         result = expression_one(self.customers[1])
-        work_latency = time.time() - start_time
+        work_latency = (time.time() - start_time) * 1000
 
-        print("Expression evaluated in {work_latency} s".format(work_latency=work_latency))
+        print("Expression evaluated in {work_latency} ms".format(work_latency=work_latency))
 
         self.assertEqual(result, JOURNEY_B)
