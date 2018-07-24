@@ -68,3 +68,15 @@ def expression_three(customer):
 
     template = env.from_string(expression)
     return template.render(dict(customer=customer))
+
+def expression_four(customer):
+    """
+    Just like expression three but using function instead of filters
+    Using custom functions
+    :param customer:
+    :return:
+    """
+    expression = "{{custom_function(customer)}}"
+
+    template = env.from_string(expression)
+    return template.render(dict(customer=customer, custom_function=custom_expression))
