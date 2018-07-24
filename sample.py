@@ -120,6 +120,18 @@ def expression_three_benchmark():
             )
     )
 
+def expression_one_benchmark():
+    return timed(
+        expression_one,
+        Customer(
+            id=5678,
+            name='Jane',
+            msisdn='300',
+            accountNumber='uvw',
+            riskband=3
+        )
+    )
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("expression_function")
