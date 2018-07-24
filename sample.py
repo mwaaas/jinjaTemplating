@@ -112,25 +112,47 @@ def timed(fun, *args):
 
 def expression_four_benchmark():
     return timed(
-        expression_four,Customer(
-                id="12132323",
-                name="testing_journey_one",
-                msisdn="0722659526",
-                accountNumber="10000",
-                riskband="6"
-            )
+        expression_four,
+        Customer(
+            id="12132323",
+            name="testing_journey_one",
+            msisdn="0722659526",
+            accountNumber="10000",
+            riskband="6"
+        )
     )
 
 
 def expression_three_benchmark():
     return timed(
-        expression_three,Customer(
-                id="12132323",
-                name="testing_journey_one",
-                msisdn="0722659526",
-                accountNumber="10000",
-                riskband="6"
-            )
+        expression_three,
+        Customer(
+            id="12132323",
+            name="testing_journey_one",
+            msisdn="0722659526",
+            accountNumber="10000",
+            riskband="6"
+        )
+    )
+
+
+def expression_two_benchmark():
+    return timed(
+        expression_three,
+        Customer(
+            id="12132323",
+            name="testing_journey_one",
+            msisdn="0722659526",
+            accountNumber="10000",
+            riskband="6"
+        ),
+        Loan(
+            id="23048w904523",
+            customerId='daou2ojwfef',
+            amount=900,
+            dueDate=datetime.now() + timedelta(days=31),
+            interest=6
+        )
     )
 
 
