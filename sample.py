@@ -1,4 +1,6 @@
 from jinja2 import Template, Environment
+from time import perf_counter as pc
+import argparse
 from datetime import datetime, timedelta
 
 FILTERS = {}
@@ -79,3 +81,44 @@ def expression_three(customer):
 
     template = env.from_string(expression)
     return template.render(dict(customer=customer))
+
+def expression_four(customer):
+    """
+    Just like expression three but using function instead of filters
+    Using custom functions
+    :param customer:
+    :return:
+    """
+    expression = "{{custom_function(customer)}}"
+
+    template = env.from_string(expression)
+    return template.render(dict(customer=customer, custom_function=custom_expression))
+
+
+def timed(fun, *args):
+    t0 = pc()
+    r = fun(*args)
+    time_taken = (pc() - t0) * 1000
+    print('{} execution took {} miliseconds.'.format(fun.__name__, time_taken))
+    return time_taken , r
+
+
+
+def expression_three_benchmark():
+    return timed(
+        expression_three,Customer(
+                id="12132323",
+                name="testing_journey_one",
+                msisdn="0722659526",
+                accountNumber="10000",
+                riskband="6"
+            )
+    )
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser("expression_function")
+    parser.add_argument('expression', type=str)
+
+    args = parser.parse_args()
+    print(globals()['expression_%s_benchmark'% args.expression]())
