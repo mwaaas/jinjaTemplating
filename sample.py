@@ -68,6 +68,12 @@ def expression_one(customer):
 
 
 def expression_two():
+    target_date = datetime.today() + timedelta(days=30)
+    expr = """{}
+
+    """
+    template = env.from_string(expr)
+    return template.render(target_date=target_date, customer=customer[0], loan=loan[0])
     pass
 
 
