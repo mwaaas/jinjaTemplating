@@ -32,12 +32,12 @@ class Customer(object):
 
 
 class Loan(object):
-    def __init__(self, id, customerId, amount, dueDate, interest):
+    def __init__(self, id, customerId, amount, dueDate, interest_rate):
         self.id = id
         self.customerId = customerId
         self.amount = amount
         self.dueDate = dueDate
-        self.interest = interest
+        self.interest_rate = interest_rate
 
 
 customer = [
@@ -56,7 +56,7 @@ loan = [
         customerId='daou2ojwfef',
         amount="4000",
         dueDate=datetime.now() + timedelta(hours=6),
-        interest="5%"
+        interest_rate=5
     )
 ]
 
