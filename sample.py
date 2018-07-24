@@ -5,11 +5,19 @@ JOURNEY_A, JOURNEY_B = 'Journey A', 'Journey B'
 FILTERS = {}
 
 
+def custom_expression(customer):
+    if customer.msisdn == "0722659526":
+        return "journeyB"
+    else:
+        return "journeyA"
+
+
 def riskband_expression(customer):
     return JOURNEY_A if customer.riskband == 4 else JOURNEY_B
 
 
 FILTERS['riskband_expression'] = riskband_expression
+FILTERS['custom_expression'] = custom_expression
 
 
 # initialize jinja2 environment
@@ -67,5 +75,14 @@ def expression_two():
     pass
 
 
-def expression_three():
-    pass
+def expression_three(customer):
+    """
+    Using custom expressions
+    If customer.msisdn = “0722659526” assign journeyB else journeyC
+    :param Customer:
+    :return:
+    """
+    expression = "{{customer|custom_expression}}"
+
+    template = env.from_string(expression)
+    return template.render(dict(customer=customer))
