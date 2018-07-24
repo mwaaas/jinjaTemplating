@@ -1,17 +1,28 @@
-from datetime import datetime, timedelta
 from jinja2 import Template, Environment
+from datetime import datetime, timedelta
 
-_registered_filters = {}
+JOURNEY_A, JOURNEY_B = 'Journey A', 'Journey B'
+FILTERS = {}
+
+
 def custom_expression(customer):
     if customer.msisdn == "0722659526":
         return "journeyB"
     else:
         return "journeyA"
-_registered_filters['custom_expression'] = custom_expression
+
+
+def riskband_expression(customer):
+    return JOURNEY_A if customer.riskband == 4 else JOURNEY_B
+
+
+FILTERS['riskband_expression'] = riskband_expression
+FILTERS['custom_expression'] = custom_expression
+
 
 # initialize jinja2 environment
 env = Environment(keep_trailing_newline=True)
-env.filters.update(_registered_filters)
+env.filters.update(FILTERS)
 
 
 class Customer(object):
@@ -22,6 +33,7 @@ class Customer(object):
         self.accountNumber = accountNumber
         self.riskband = riskband
 
+
 class Loan(object):
     def __init__(self, id, customerId, amount, dueDate, interest):
         self.id = id
@@ -29,6 +41,7 @@ class Loan(object):
         self.amount = amount
         self.dueDate = dueDate
         self.interest = interest
+
 
 customer = [
     Customer(
@@ -50,12 +63,17 @@ loan = [
     )
 ]
 
-def expression_one():
-    pass
+
+def expression_one(customer):
+    # if customer.riskband > 4 assign JOURNEY_A else assign JOURNEY_B
+
+    t = env.from_string("{{customer|riskband_expression}}")
+    return t.render(dict(customer=customer))
 
 
 def expression_two():
     pass
+
 
 def expression_three(customer):
     """
