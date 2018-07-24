@@ -1,5 +1,17 @@
-from jinja2 import Template
 from datetime import datetime, timedelta
+from jinja2 import Template, Environment
+
+_registered_filters = {}
+def custom_expression(customer):
+    if customer.msisdn == "0722659526":
+        return "journeyB"
+    else:
+        return "journeyA"
+_registered_filters['custom_expression'] = custom_expression
+
+# initialize jinja2 environment
+env = Environment(keep_trailing_newline=True)
+env.filters.update(_registered_filters)
 
 
 class Customer(object):
@@ -45,5 +57,14 @@ def expression_one():
 def expression_two():
     pass
 
-def expression_three():
-    pass
+def expression_three(customer):
+    """
+    Using custom expressions
+    If customer.msisdn = “0722659526” assign journeyB else journeyC
+    :param Customer:
+    :return:
+    """
+    expression = "{{customer|custom_expression}}"
+
+    template = env.from_string(expression)
+    return template.render(dict(customer=customer))
