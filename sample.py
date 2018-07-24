@@ -62,9 +62,16 @@ loan = [
 
 
 def expression_one(customer):
-    # if customer.riskband > 4 assign JOURNEY_A else assign JOURNEY_B
-    t = env.from_string("{% if customer.riskband==4 %}Journey A{% else %}Journey B{% endif %}")
-    return t.render(dict(customer=customer))
+    """
+    if customer.riskband > 4 assign JOURNEY_A else assign JOURNEY_B
+    """
+    expression = "{% if customer.riskband==4 %}{{JOURNEY_A}}{% else %}{{JOURNEY_B}}{% endif %}"
+    t = env.from_string(expression)
+    return t.render(dict(
+        customer=customer,
+        JOURNEY_A=JOURNEY_A,
+        JOURNEY_B=JOURNEY_B
+    ))
 
 
 def expression_two(name, msisdn):
