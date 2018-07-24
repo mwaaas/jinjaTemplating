@@ -1,8 +1,25 @@
 from jinja2 import Template
 from datetime import datetime, timedelta
 
+
+class Customer(object):
+    def __init__(self, id, name, msisdn, accountNumber, riskband):
+        self.id = id
+        self.name = name
+        self.msisdn = msisdn
+        self.accountNumber = accountNumber
+        self.riskband = riskband
+
+class Loan(object):
+    def __init__(self, id, customerId, amount, dueDate, interest):
+        self.id = id
+        self.customerId = customerId
+        self.amount = amount
+        self.dueDate = dueDate
+        self.interest = interest
+
 customer = [
-    dict(
+    Customer(
         id="23345363",
         name="jinja",
         msisdn="254702729654",
@@ -12,7 +29,7 @@ customer = [
 ]
 
 loan = [
-    dict(
+    Loan(
         id="23048w904523",
         customerId='daou2ojwfef',
         amount="4000",
