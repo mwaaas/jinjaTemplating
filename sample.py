@@ -1,7 +1,6 @@
 from jinja2 import Template, Environment
 from datetime import datetime, timedelta
 
-JOURNEY_A, JOURNEY_B = 'Journey A', 'Journey B'
 FILTERS = {}
 
 
@@ -12,11 +11,6 @@ def custom_expression(customer):
         return "journeyA"
 
 
-def riskband_expression(customer):
-    return JOURNEY_A if customer.riskband == 4 else JOURNEY_B
-
-
-FILTERS['riskband_expression'] = riskband_expression
 FILTERS['custom_expression'] = custom_expression
 
 
@@ -66,8 +60,7 @@ loan = [
 
 def expression_one(customer):
     # if customer.riskband > 4 assign JOURNEY_A else assign JOURNEY_B
-
-    t = env.from_string("{{customer|riskband_expression}}")
+    t = env.from_string("{% if customer.riskband==4 %}Journey A{% else %}Journey B{% endif %}")
     return t.render(dict(customer=customer))
 
 
