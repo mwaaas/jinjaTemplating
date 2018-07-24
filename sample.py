@@ -107,7 +107,16 @@ def timed(fun, *args):
     print('{} execution took {} miliseconds.'.format(fun.__name__, avarage_time_taken))
     return avarage_time_taken
 
-
+def expression_four_benchmark():
+    return timed(
+        expression_four,Customer(
+                id="12132323",
+                name="testing_journey_one",
+                msisdn="0722659526",
+                accountNumber="10000",
+                riskband="6"
+            )
+    )
 
 def expression_three_benchmark():
     return timed(
