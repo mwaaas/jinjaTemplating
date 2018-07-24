@@ -29,14 +29,14 @@ class TestingExpressionOne(TestCase):
                 customerId='daou2ojwfef',
                 amount=900,
                 dueDate=datetime.now() + timedelta(days=31),
-                interest_rate=6
+                interest=6
             ),
             Loan(
                 id="23048w904523",
                 customerId='baox2ojwfeg',
                 amount=3000,
                 dueDate=datetime.now() + timedelta(days=21),
-                interest_rate=4
+                interest=4
             )
         ]
 

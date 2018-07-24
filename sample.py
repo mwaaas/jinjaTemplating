@@ -32,12 +32,12 @@ class Customer(object):
 
 
 class Loan(object):
-    def __init__(self, id, customerId, amount, dueDate, interest_rate):
+    def __init__(self, id, customerId, amount, dueDate, interest):
         self.id = id
         self.customerId = customerId
         self.amount = amount
         self.dueDate = dueDate
-        self.interest_rate = interest_rate
+        self.interest = interest
 
 
 customer = [
@@ -56,7 +56,7 @@ loan = [
         customerId='daou2ojwfef',
         amount="4000",
         dueDate=datetime.now() + timedelta(hours=6),
-        interest_rate=5
+        interest=5
     )
 ]
 
@@ -76,7 +76,7 @@ def expression_one(customer):
 
 def expression_two(customer, loan):
     target_date = datetime.today() + timedelta(days=30)
-    expr = "{% if loan.dueDate >= target_date and loan.amount < 1000 and loan.interest_rate > 5 %}" \
+    expr = "{% if loan.dueDate >= target_date and loan.amount < 1000 and loan.interest > 5 %}" \
            "{{JOURNEY_B}}{% elif customer.name == name and customer.msisdn == msisdn %}" \
            "{{JOURNEY_A}}" \
            "{% else %}DEFAULT{% endif %}"
